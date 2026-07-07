@@ -9,15 +9,17 @@ interface GameGridProps {
   rows: SudokuGridType,
   setSquareValue: Function,
   startingPosition: SudokuGridType,
-  invalidCoordinates: Set<string>
+  invalidCoordinates: Set<string>,
+  activeSquare: any,
+  setActiveSquare: any
 }
 
 export default function GameGrid(props: GameGridProps) {
-  const [activeSquare, setActiveSquare] = useState<CoordinatesType>([-1, -1]);
+  // const [activeSquare, setActiveSquare] = useState<CoordinatesType>([-1, -1]);
 
   function handleArrowKey(keyCode: number) {
-    const newActiveSquare = getNewActiveSquare(activeSquare, keyCode);
-    setActiveSquare(newActiveSquare);
+    const newActiveSquare = getNewActiveSquare(props.activeSquare, keyCode);
+    props.setActiveSquare(newActiveSquare);
   }
 
   return (
@@ -31,8 +33,8 @@ export default function GameGrid(props: GameGridProps) {
             setSquareValue={props.setSquareValue}
             handleArrowKey={handleArrowKey}
             rowStartingPosition={props.startingPosition[index]}
-            activeSquare={activeSquare}
-            setActiveSquare={setActiveSquare}
+            activeSquare={props.activeSquare}
+            setActiveSquare={props.setActiveSquare}
             invalidCoordinates={props.invalidCoordinates}
           />
         )
