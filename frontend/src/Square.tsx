@@ -25,10 +25,6 @@ export default function Square(props: SquareProps) {
     }
   }, [props.isActiveSquare]);
 
-  function handleChange(val: any) {
-    props.setSquareValue(val, props.column);
-  }
-
   return (
     <>
       <input
@@ -38,7 +34,7 @@ export default function Square(props: SquareProps) {
         value={props.value ? props.value : ''}
         // maxLength={1}
         ref={ref}
-        onChange={e => handleChange(e.target.value)}
+        // onChange={e => handleChange(e.target.value)}
         // onKeyDown={handleKeyDown(val)}
         onClick={props.setActiveSquare}
       />

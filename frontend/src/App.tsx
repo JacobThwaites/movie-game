@@ -11,11 +11,20 @@ function App() {
   const [invalidCoordinates, setInvalidCoordinates] = useState<Set<string>>(new Set());
   const [guess, setGuess] = useState<string>("");
   const [activeSquare, setActiveSquare] = useState<CoordinatesType>([-1, -1]);
+  const [guessesRemaining, setGuessesRemaining] = useState(9);
+  const answers = [["1",2,3], [4,5,6], [7,8,9]]
 
 
-  function setSquareValue(answer: any, row: number, col: number): void {
+  function setSquareValue(guess: any, row: number, col: number): void {
+    const answer = answers[col][row];
+
+    if (guess !== answer) {
+      setGuessesRemaining(guessesRemaining - 1);
+      return;
+    }
+
     const newRows = [...rows];
-    newRows[row][col] = answer;
+    newRows[row][col] = guess;
     setRows(newRows);
   };
 
@@ -34,6 +43,7 @@ function App() {
         setGuess={setSquareValue}
         activeSquare={activeSquare}
       />
+      <p>{guessesRemaining} Guesses Remaining</p>
     </div>
   );
 }
