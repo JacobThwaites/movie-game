@@ -22,6 +22,7 @@
 
 .active {
   border: 3px solid blue;
+  background-color: grey;
 }
 
 .square:user-invalid {
@@ -51,4 +52,8 @@
   width: 150px;
   height: 150px;
   box-sizing: border-box;
+}
+
+.square:hover {
+  background-color: lightgrey;
 }

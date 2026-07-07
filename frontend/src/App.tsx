@@ -12,16 +12,39 @@ function App() {
   const [guess, setGuess] = useState<string>("");
   const [activeSquare, setActiveSquare] = useState<CoordinatesType>([-1, -1]);
   const [guessesRemaining, setGuessesRemaining] = useState(9);
-  const answers = [["1",2,3], [4,5,6], [7,8,9]]
+  const [answers, setAnswers] = useState<Array<any>>([]);
   const rowLabels = ["Morgan Freeman", "Cameron Diaz", "Martin Scorsese"];
   const colLabels = ["One word title", "Two Word Title", "3 or more word Title"];
 
+  useEffect(() => {
+    const data = getAnswers();
+    setAnswers(data);
+  }, []);
+
+  function getAnswers() {
+    return [
+      [
+        ['a', 'b'],
+        ['a', 'b'],
+        ['a', 'b'],
+      ],
+      [
+        ['a', 'b'],
+        ['a', 'b'],
+        ['a', 'b'],
+      ],
+      [
+        ['a', 'b'],
+        ['a', 'b'],
+        ['a', 'b'],
+      ]
+    ];
+  }
 
   function setSquareValue(guess: any, row: number, col: number): void {
-    const answer = answers[col][row];
+    const allowedAnswers = answers[col][row];
 
-
-    if (guess !== answer) {
+    if (!allowedAnswers.includes(guess)) {
       setGuess("");
       setGuessesRemaining(guessesRemaining - 1);
       return;
