@@ -176,8 +176,11 @@ export function isCorrectMovieGuess(
 }
 
 async function fetchRandomActors(): Promise<Actor[]> {
+  const cacheNonce = `${Date.now()}-${Math.random()}`;
   const query = `${PREFIXES}
 SELECT DISTINCT ?actor ?actorLabel WHERE {
+  BIND("${cacheNonce}" AS ?cacheNonce)
+
   VALUES ?award {
     wd:Q103916
     wd:Q106291
@@ -290,6 +293,7 @@ async function runSparql(query: string): Promise<SparqlResponse> {
   const response = await fetch(
     `${WIKIDATA_ENDPOINT}?query=${encodeURIComponent(query)}&format=json`,
     {
+      cache: "no-store",
       headers: {
         Accept: "application/sparql-results+json",
       },
