@@ -1,1 +1,1 @@
-export type SudokuGridType = Array<Array<number|null>>;
+export type SudokuGridType = Array<Array<string | null>>;

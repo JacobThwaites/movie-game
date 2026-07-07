@@ -23,6 +23,7 @@ export default function Square(props: SquareProps) {
         value={props.value ? props.value : ''}
         ref={ref}
         onClick={props.setActiveSquare}
+        readOnly
       />
     </>
   );

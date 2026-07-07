@@ -17,8 +17,8 @@ interface RowProps {
 }
 
 export default function Row(props: RowProps) {
-  function setSquareValue(num: number, column: number) {
-    props.setSquareValue(num, props.rowIndex, column);
+  function setSquareValue(guess: string, column: number) {
+    props.setSquareValue(guess, props.rowIndex, column);
   }
 
   function setActiveSquare(column: number) {
