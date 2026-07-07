@@ -25,21 +25,8 @@ export default function Square(props: SquareProps) {
     }
   }, [props.isActiveSquare]);
 
-  function handleKeyDown(event: any) {
-    if (isArrowKeyPress(event.keyCode)) {
-      props.handleArrowKey(event.keyCode);
-      return;
-    }
-
-    if (isBackspacePress(event.keyCode)) {
-      props.setSquareValue(null, props.column);
-      return;
-    }
-
-    if (isNumberKeyPress(event.keyCode)) {
-      props.setSquareValue(Number(event.key), props.column);
-      return;
-    }
+  function handleChange(val: any) {
+    props.setSquareValue(val, props.column);
   }
 
   return (
@@ -49,11 +36,10 @@ export default function Square(props: SquareProps) {
         className={props.className}
         type="text"
         value={props.value ? props.value : ''}
-        maxLength={1}
+        // maxLength={1}
         ref={ref}
-        // onChange handled by onKeydown
-        onChange={() => {}}
-        onKeyDown={handleKeyDown}
+        onChange={e => handleChange(e.target.value)}
+        // onKeyDown={handleKeyDown(val)}
         onClick={props.setActiveSquare}
       />
     </>

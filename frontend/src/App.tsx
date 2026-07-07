@@ -9,9 +9,9 @@ function App() {
   const [invalidCoordinates, setInvalidCoordinates] = useState<Set<string>>(new Set())
 
 
-  function setSquareValue(num: number, row: number, col: number): void {
+  function setSquareValue(answer: any, row: number, col: number): void {
     const newRows = [...rows];
-    newRows[row][col] = num;
+    newRows[row][col] = answer;
     setRows(newRows);
   };
 

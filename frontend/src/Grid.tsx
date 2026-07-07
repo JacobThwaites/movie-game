@@ -27,7 +27,7 @@ export default function GameGrid(props: GameGridProps) {
           <Row
             key={index}
             rowIndex={index}
-            numbers={row}
+            answers={row}
             setSquareValue={props.setSquareValue}
             handleArrowKey={handleArrowKey}
             rowStartingPosition={props.startingPosition[index]}
