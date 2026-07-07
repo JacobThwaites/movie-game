@@ -6,8 +6,9 @@ import GuessInput from "./GuessInput";
 import { CoordinatesType } from "./utils/CoordinatesType";
 import {
   createGameSetup,
+  findMatchingMovieGuess,
   GameSetup,
-  isCorrectMovieGuess,
+  MovieAnswer,
 } from "./services/wikidataGameSetup";
 
 function App() {
@@ -60,8 +61,9 @@ function App() {
     }
 
     const answers = gameSetup.answers[row][col];
+    const selectedMovie = findMatchingMovieGuess(guess, answers);
 
-    if (!isCorrectMovieGuess(guess, answers)) {
+    if (!selectedMovie) {
       setGuessesRemaining((remaining) => Math.max(remaining - 1, 0));
       setInvalidCoordinates((coordinates) => {
         const nextCoordinates = new Set(coordinates);
@@ -73,13 +75,17 @@ function App() {
 
     const newRows = [...rows];
     newRows[row] = [...newRows[row]];
-    newRows[row][col] = answers[0].title;
+    newRows[row][col] = selectedMovie;
     setRows(newRows);
   };
 
   const rowLabels = gameSetup?.actors.map((actor) => actor.label) ?? ["", "", ""];
   const colLabels =
     gameSetup?.categories.map((category) => category.label) ?? ["", "", ""];
+  const activeMovieOptions: MovieAnswer[] =
+    gameSetup && activeSquare[0] >= 0 && activeSquare[1] >= 0
+      ? gameSetup.answers[activeSquare[0]][activeSquare[1]]
+      : [];
 
   return (
     <div className="App">
@@ -100,6 +106,7 @@ function App() {
         setGuess={setSquareValue}
         activeSquare={activeSquare}
         disabled={setupStatus !== "ready"}
+        movieOptions={activeMovieOptions}
       />
       <p>{guessesRemaining} Guesses Remaining</p>
     </div>

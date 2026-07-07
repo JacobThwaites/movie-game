@@ -163,16 +163,23 @@ export async function createGameSetup(): Promise<GameSetup> {
   throw new Error("Could not find three actors with three matching categories.");
 }
 
-export function isCorrectMovieGuess(
+export function findMatchingMovieGuess(
   guess: string,
   answers: MovieAnswer[] | undefined
-): boolean {
+): MovieAnswer | undefined {
   const normalizedGuess = normalizeTitle(guess);
+  const normalizedGuessWithId = guess.trim().toLowerCase();
 
-  return Boolean(
-    normalizedGuess &&
-      answers?.some((answer) => normalizeTitle(answer.title) === normalizedGuess)
+  return answers?.find(
+    (answer) =>
+      normalizeTitle(answer.title) === normalizedGuess ||
+      answer.id.toLowerCase() === normalizedGuessWithId ||
+      formatMovieOption(answer).toLowerCase() === normalizedGuessWithId
   );
+}
+
+export function formatMovieOption(movie: MovieAnswer): string {
+  return `${movie.title} (${movie.id})`;
 }
 
 async function fetchRandomActors(): Promise<Actor[]> {
