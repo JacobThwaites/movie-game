@@ -12,16 +12,17 @@ function App() {
   const [guess, setGuess] = useState<string>("");
   const [activeSquare, setActiveSquare] = useState<CoordinatesType>([-1, -1]);
   const [guessesRemaining, setGuessesRemaining] = useState(9);
-  const [answers, setAnswers] = useState<Array<any>>([]);
+  const [allowedAnswers, setAllowedAnswers] = useState<Array<any>>([]);
   const rowLabels = ["Morgan Freeman", "Cameron Diaz", "Martin Scorsese"];
   const colLabels = ["One word title", "Two Word Title", "3 or more word Title"];
 
+
   useEffect(() => {
-    const data = getAnswers();
-    setAnswers(data);
+    const data = getAllowedAnswers();
+    setAllowdAnswers(data);
   }, []);
 
-  function getAnswers() {
+  function getAllowedAnswers() {
     return [
       [
         ['a', 'b'],
@@ -42,9 +43,13 @@ function App() {
   }
 
   function setSquareValue(guess: any, row: number, col: number): void {
-    const allowedAnswers = answers[col][row];
+    const answers = allowedAnswers[col][row];
 
-    if (!allowedAnswers.includes(guess)) {
+    if (isAlreadyGuessed(guess)) {
+      return;
+    }
+
+    if (!answers.includes(guess)) {
       setGuess("");
       setGuessesRemaining(guessesRemaining - 1);
       return;
@@ -55,6 +60,17 @@ function App() {
     newRows[row][col] = guess;
     setRows(newRows);
   };
+
+  function isAlreadyGuessed(guess: any) {
+    for (let i = 0; i < rows.length; i++) {
+      for (let j = 0; j < rows[i].length; j++) {
+        if (guess === rows[i][j]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 
   return (
     <div className="App">
