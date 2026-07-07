@@ -11,7 +11,9 @@ interface RowProps {
   rowStartingPosition: Array<any>,
   activeSquare: CoordinatesType,
   setActiveSquare: Function,
-  invalidCoordinates: Set<string>
+  invalidCoordinates: Set<string>,
+  label: any,
+  colLabels: any
 }
 
 export default function Row(props: RowProps) {
@@ -32,7 +34,7 @@ export default function Row(props: RowProps) {
 
           {props.answers.map((_, column: number) => (
             <div key={column} className="column-label">
-              {column + 1}
+              {props.colLabels[column]}
             </div>
           ))}
         </div>
@@ -40,7 +42,7 @@ export default function Row(props: RowProps) {
 
       <div className="row">
         <div className="row-label">
-          {props.rowIndex + 1}
+          {props.label}
         </div>
 
         {props.answers.map((answer: string, column: number) => {

@@ -16,3 +16,22 @@
 .column-header {
   margin-bottom: 4px;
 }
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.row-label,
+.column-label {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.column-header {
+  margin-bottom: 4px;
+}

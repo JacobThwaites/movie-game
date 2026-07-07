@@ -46,3 +46,9 @@
       font-size: 1.5rem;
     }
   }
+
+.square {
+  width: 150px;
+  height: 150px;
+  box-sizing: border-box;
+}

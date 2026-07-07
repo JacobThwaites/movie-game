@@ -1,8 +1,5 @@
-import { useState } from "react";
 import Row from './Row';
 import { SudokuGridType } from "./SudokuGridType";
-import { CoordinatesType } from "./utils/CoordinatesType";
-import { getNewActiveSquare } from "./utils/getNewActiveSquare";
 import './GameGrid.css';
 
 interface GameGridProps {
@@ -11,7 +8,9 @@ interface GameGridProps {
   startingPosition: SudokuGridType,
   invalidCoordinates: Set<string>,
   activeSquare: any,
-  setActiveSquare: any
+  setActiveSquare: any,
+  rowLabels: any,
+  colLabels: any
 }
 
 export default function GameGrid(props: GameGridProps) {
@@ -29,6 +28,8 @@ export default function GameGrid(props: GameGridProps) {
             activeSquare={props.activeSquare}
             setActiveSquare={props.setActiveSquare}
             invalidCoordinates={props.invalidCoordinates}
+            label={props.rowLabels[index]}
+            colLabels={props.colLabels}
           />
         )
       })

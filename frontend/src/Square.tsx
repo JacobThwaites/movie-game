@@ -1,5 +1,4 @@
-import { useRef, useEffect } from 'react';
-import { isArrowKeyPress, isBackspacePress, isNumberKeyPress } from './utils/keypressValidation';
+import { useRef } from 'react';
 import './Square.css'
 
 
@@ -23,8 +22,6 @@ export default function Square(props: SquareProps) {
         type="text"
         value={props.value ? props.value : ''}
         ref={ref}
-        // onChange={e => handleChange(e.target.value)}
-        // onKeyDown={handleKeyDown(val)}
         onClick={props.setActiveSquare}
       />
     </>
