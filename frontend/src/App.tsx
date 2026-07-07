@@ -18,11 +18,14 @@ function App() {
   function setSquareValue(guess: any, row: number, col: number): void {
     const answer = answers[col][row];
 
+
     if (guess !== answer) {
+      setGuess("");
       setGuessesRemaining(guessesRemaining - 1);
       return;
     }
 
+    setGuess("");
     const newRows = [...rows];
     newRows[row][col] = guess;
     setRows(newRows);

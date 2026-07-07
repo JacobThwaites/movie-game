@@ -15,12 +15,6 @@ interface GameGridProps {
 }
 
 export default function GameGrid(props: GameGridProps) {
-  // const [activeSquare, setActiveSquare] = useState<CoordinatesType>([-1, -1]);
-
-  function handleArrowKey(keyCode: number) {
-    const newActiveSquare = getNewActiveSquare(props.activeSquare, keyCode);
-    props.setActiveSquare(newActiveSquare);
-  }
 
   return (
     <div id='sudoku'>
@@ -31,7 +25,6 @@ export default function GameGrid(props: GameGridProps) {
             rowIndex={index}
             answers={row}
             setSquareValue={props.setSquareValue}
-            handleArrowKey={handleArrowKey}
             rowStartingPosition={props.startingPosition[index]}
             activeSquare={props.activeSquare}
             setActiveSquare={props.setActiveSquare}

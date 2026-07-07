@@ -1,3 +1,18 @@
 .row {
-    width: 700px;
+  display: flex;
+  align-items: center;
+}
+
+.row-label,
+.column-label {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.column-header {
+  margin-bottom: 4px;
 }

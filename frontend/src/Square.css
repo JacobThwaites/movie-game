@@ -20,29 +20,8 @@
   font-weight: bold;
 }
 
-.top-square {
-  border-top: 3px solid black;
-}
-
-.bottom-square {
-  border-bottom: 3px solid black;
-}
-
-.left-square {
-  border-left: 3px solid black;
-}
-
-.right-square {
-  border-right: 3px solid black;
-}
-
-.invalid {
-  background: radial-gradient(
-      circle,
-      rgba(255, 0, 0, 0) 50%,
-      rgba(255, 0, 0, 0.5) 80%,
-      rgba(255, 0, 0, 1) 100%
-    );
+.active {
+  border: 3px solid blue;
 }
 
 .square:user-invalid {

@@ -8,7 +8,6 @@ interface RowProps {
   rowIndex: number,
   answers: Array<any>,
   setSquareValue: Function,
-  handleArrowKey: Function,
   rowStartingPosition: Array<any>,
   activeSquare: CoordinatesType,
   setActiveSquare: Function,
@@ -16,35 +15,57 @@ interface RowProps {
 }
 
 export default function Row(props: RowProps) {
-    function setSquareValue(num: number, column: number) {
-        props.setSquareValue(num, props.rowIndex, column);
-    }
+  function setSquareValue(num: number, column: number) {
+    props.setSquareValue(num, props.rowIndex, column);
+  }
 
-    function setActiveSquare(column: number) {
-      const newActiveSquare: CoordinatesType = [props.rowIndex, column];
-      props.setActiveSquare(newActiveSquare);
-    }
+  function setActiveSquare(column: number) {
+    const newActiveSquare: CoordinatesType = [props.rowIndex, column];
+    props.setActiveSquare(newActiveSquare);
+  }
 
   return (
-    <div className='row'>
-      {props.answers.map((answer: string, column: number) => {
-        const isSet = props.rowStartingPosition[column] !== null;
-        const isActiveSquare = areCoordinatesEqual([props.rowIndex, column], props.activeSquare);
-        const isInvalid = props.invalidCoordinates.has(`${props.rowIndex}${column}`);
+    <>
+      {props.rowIndex === 0 && (
+        <div className="row column-header">
+          <div className="row-label"></div>
 
-        return (
-          <Square
-            className={getSquareClassname(props.rowIndex + 1, column + 1, isSet, isInvalid)}
-            isActiveSquare={isActiveSquare}
-            key={column}
-            column={column}
-            value={answer}
-            setSquareValue={setSquareValue}
-            handleArrowKey={props.handleArrowKey}
-            setActiveSquare={() => setActiveSquare(column)}
-          />
-        );
-      })}
-    </div>
+          {props.answers.map((_, column: number) => (
+            <div key={column} className="column-label">
+              {column + 1}
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="row">
+        <div className="row-label">
+          {props.rowIndex + 1}
+        </div>
+
+        {props.answers.map((answer: string, column: number) => {
+          const isActiveSquare = areCoordinatesEqual(
+            [props.rowIndex, column],
+            props.activeSquare
+          );
+
+          return (
+            <Square
+              className={getSquareClassname(
+                props.rowIndex + 1,
+                column + 1,
+                isActiveSquare
+              )}
+              isActiveSquare={isActiveSquare}
+              key={column}
+              column={column}
+              value={answer}
+              setSquareValue={setSquareValue}
+              setActiveSquare={() => setActiveSquare(column)}
+            />
+          );
+        })}
+      </div>
+    </>
   );
 }
